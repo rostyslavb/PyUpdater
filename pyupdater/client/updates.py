@@ -34,6 +34,7 @@ import tarfile
 import threading
 import zipfile
 import six
+import stat
 
 from dsdev_utils.helpers import Version
 from dsdev_utils.paths import ChDir, get_mac_dot_app_dir, remove_any
@@ -228,6 +229,9 @@ class Restarter(object):  # pragma: no cover
             self._restart()
 
     def _restart(self):
+        # fix file permissions after unzipping
+        if sys.platform != 'win32':
+            os.chmod(self.current_app, os.stat(self.current_app).st_mode | stat.S_IEXEC)
         os.execl(self.current_app, self.name, *sys.argv[1:])
 
     def _win_overwrite(self):
