@@ -28,7 +28,7 @@ import json
 import logging
 import os
 import tempfile
-import warnings
+# import warnings
 
 import appdirs
 from dsdev_utils.app import app_cwd, FROZEN
@@ -50,7 +50,7 @@ from pyupdater.utils.config import Config as _Config
 from pyupdater.utils.exceptions import ClientError
 
 
-warnings.simplefilter("always", DeprecationWarning)
+# warnings.simplefilter("always", DeprecationWarning)
 
 
 log = logging.getLogger(__name__)
