@@ -141,7 +141,8 @@ class FileDownloader(object):
     def _get_http_pool(self, secure=True):
         if secure:
             _http = urllib3.PoolManager(
-                cert_reqs=str("CERT_REQUIRED"), ca_certs=certifi.where()
+                cert_reqs=str("CERT_REQUIRED"),
+                ca_certs=os.environ.get('SSL_CERT_FILE', certifi.where())
             )
         else:
             _http = urllib3.PoolManager()
